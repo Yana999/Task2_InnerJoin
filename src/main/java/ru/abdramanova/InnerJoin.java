@@ -5,9 +5,11 @@ import ru.abdramanova.entity.Table;
 import ru.abdramanova.fileLoader.TableLoader;
 import ru.abdramanova.fileLoader.txtFileLoader;
 import ru.abdramanova.join.ArrayListJoin;
+import ru.abdramanova.join.LinkedListJoin;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,8 +24,12 @@ public class InnerJoin {
             System.out.println();
             tableB.forEach(System.out::println);
             System.out.println();
-            List<Intersection> arrayListResult = ArrayListJoin.innerJoin(new ArrayList<>(tableA), new ArrayList<>(tableB));
+            List<Intersection> arrayListResult = new ArrayListJoin(new ArrayList<>(tableA), new ArrayList<>(tableB)).innerJoin();
             arrayListResult.stream().sorted(Comparator.comparing(Intersection::getId)).forEach(System.out::println);
+            System.out.println();
+            List<Intersection> linkedListResult = new LinkedListJoin(new LinkedList<>(tableA), new LinkedList<>(tableB)).innerJoin();
+            linkedListResult.stream().sorted(Comparator.comparing(Intersection::getId)).forEach(System.out::println);
+            System.out.println("dct");
         } else if(args.length == 3){
             // write code for results
             System.out.println("results");

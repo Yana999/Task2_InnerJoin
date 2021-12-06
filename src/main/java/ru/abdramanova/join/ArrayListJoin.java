@@ -6,8 +6,17 @@ import ru.abdramanova.entity.Table;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayListJoin {
-    public static List<Intersection> innerJoin(ArrayList<Table> table1, ArrayList<Table> table2){
+public class ArrayListJoin implements InnerJoin{
+    private ArrayList<Table> table1;
+    private ArrayList<Table> table2;
+
+    public ArrayListJoin(ArrayList<Table> table1, ArrayList<Table> table2) {
+        this.table1 = table1;
+        this.table2 = table2;
+    }
+
+    @Override
+    public List<Intersection> innerJoin() {
         ArrayList<Intersection> result = new ArrayList<>();
         for(Table line1 : table1){
             for (Table line2 : table2) {
