@@ -25,7 +25,7 @@ public class LinkedListJoin implements InnerJoin{
         List<Intersection> result = new LinkedList<>();
         for(int i = 0, j = 0; i < table1.size() && j < table2.size();){
             if(table1.get(i).getId() == table2.get(j).getId()) {
-                for(int k = j; table1.get(i).getId() == table2.get(k).getId(); ++k){
+                for(int k = j; k < table2.size() && table1.get(i).getId() == table2.get(k).getId(); ++k){
                     result.add(new Intersection(table1.get(i).getId(), table1.get(i).getValue(), table2.get(k).getValue()));
                 }
                 ++i;
