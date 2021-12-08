@@ -10,8 +10,8 @@ public final class Table {
     }
 
     public static Table parseTable(String id, String value) throws IllegalArgumentException{
-        long tryId = Long.parseLong(id);
-        return new Table(tryId, value);
+        long tryId = Long.parseLong(id.trim());
+        return new Table(tryId, value.trim());
     }
 
     public long getId() {

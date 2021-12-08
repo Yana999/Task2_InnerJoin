@@ -6,23 +6,14 @@ import ru.abdramanova.entity.Table;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class LinkedListJoin implements InnerJoin{
-
-    private LinkedList<Table> table1;
-    private LinkedList<Table> table2;
-
-    public LinkedListJoin(LinkedList<Table> table1, LinkedList<Table> table2) {
-        this.table1 = table1;
-        this.table2 = table2;
-        this.table1.sort(Comparator.comparing(Table::getId));
-        this.table2.sort(Comparator.comparing(Table::getId));
-    }
+public class LinkedListJoin implements InnerJoin<LinkedList<Table>>{
 
     @Override
-    public List<Intersection> innerJoin() {
+    public List<Intersection> innerJoin(LinkedList<Table> table1, LinkedList<Table> table2) {
         List<Intersection> result = new LinkedList<>();
+        table1.sort(Comparator.comparing(Table::getId));
+        table2.sort(Comparator.comparing(Table::getId));
         for(int i = 0, j = 0; i < table1.size() && j < table2.size();){
             if(table1.get(i).getId() == table2.get(j).getId()) {
                 for(int k = j; k < table2.size() && table1.get(i).getId() == table2.get(k).getId(); ++k){
@@ -37,4 +28,16 @@ public class LinkedListJoin implements InnerJoin{
         }
         return result;
     }
+
+    /*while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                result.add(nums1[i]);
+                i++;
+                j++;
+            } else if (nums1[i] < nums2[j]){
+                i++;
+            } else {
+                j++;
+            }
+        }*/
 }

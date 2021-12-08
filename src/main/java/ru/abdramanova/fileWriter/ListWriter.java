@@ -20,9 +20,17 @@ public class ListWriter {
 
     public void saveTable(String directoryName, String fileName, List<Intersection> listToWrite){
         try {
-            File file = new File(directoryName.substring(0, directoryName.lastIndexOf("\\")) + fileName);
-            file.createNewFile();
-            saveTable(file.getAbsolutePath(), listToWrite);
+            String path = directoryName.substring(0, directoryName.lastIndexOf("\\") + 1) + fileName;
+            File file = new File(path);
+            if (!file.createNewFile()){
+                if(file.exists()){
+                    saveTable(file.getAbsolutePath(),  listToWrite);
+                }else{
+                    System.out.println("Cannot create the file for writing");
+                }
+            }else {
+                saveTable(file.getAbsolutePath(),  listToWrite);
+            }
         }catch (IOException e){
             System.out.println("Something went wrong! Cannot write to file ");
         }
