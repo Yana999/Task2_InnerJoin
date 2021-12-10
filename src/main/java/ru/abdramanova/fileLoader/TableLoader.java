@@ -1,9 +1,9 @@
 package ru.abdramanova.fileLoader;
 
-import ru.abdramanova.entity.Table;
+import ru.abdramanova.entity.Row;
 
 import java.util.List;
 
 public interface TableLoader {
-    List<Table> readTable(String path);
+    List<Row> readTable(String path);
 }
