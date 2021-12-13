@@ -23,8 +23,7 @@ public class InnerJoin {
                 ProxyHashMapJoin proxyHashMapJoin = new ProxyHashMapJoin();
                 proxyHashMapJoin.innerJoin(tableA, tableB, args[0], "hashMapResult.txt");
             }else {
-                //написать для указанного пути
-                //            //---------------ArrayList-------------------------------------------
+                //---------------ArrayList-------------------------------------------
                 proxyArray.innerJoin(tableA, tableB, args[2]);
                 //----------------LinkedList-----------------------------------------
                 ProxyLinkedListJoin proxyLinkedListJoin = new ProxyLinkedListJoin();

@@ -7,18 +7,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
-public class HashMapJoin implements InnerJoin <HashMap<Long, List<Row>>>{
+public class HashMapJoin implements InnerJoin <HashMap<Long, List<String>>>{
 
     @Override
-    public void innerJoin(HashMap<Long, List<Row>> table1, HashMap<Long, List<Row>> table2, String path) {
+    public void innerJoin(HashMap<Long, List<String>> table1, HashMap<Long, List<String>> table2, String path) {
         try(FileWriter writer = new FileWriter(path)) {
-            for (Map.Entry<Long, List<Row>> line1 : table1.entrySet()) {
+            for (Map.Entry<Long, List<String>> line1 : table1.entrySet()) {
                 if (table2.containsKey(line1.getKey())) {
-                    List<Row> t1 = line1.getValue();
-                    List<Row> t2 = table2.get(line1.getKey());
-                    for (Row value1 : t1) {
-                        for (Row value2 : t2) {
-                            writer.write(value1.getId() + ", " + value1.getValue() + ", " + value2.getValue() + "\n");
+                    List<String> t1 = line1.getValue();
+                    List<String> t2 = table2.get(line1.getKey());
+                    for (String value1 : t1) {
+                        for (String value2 : t2) {
+                            writer.write(line1.getKey() + ", " + value1 + ", " + value2 + "\n");
                         }
                     }
                 }
@@ -29,7 +29,7 @@ public class HashMapJoin implements InnerJoin <HashMap<Long, List<Row>>>{
     }
 
     @Override
-    public void innerJoin(HashMap<Long, List<Row>> table1, HashMap<Long, List<Row>> table2, String directoryName, String fileName) {
+    public void innerJoin(HashMap<Long, List<String>> table1, HashMap<Long, List<String>> table2, String directoryName, String fileName) {
         try {
             String path = directoryName.substring(0, directoryName.lastIndexOf("\\") + 1) + fileName;
             File file = new File(path);
