@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface InnerJoin <T> {
-   void innerJoin(T table1, T table2, String directoryName, String fileName);
+   T convert(List<Row> table1);
    void innerJoin(T table1, T table2, String path);
 }
 

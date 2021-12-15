@@ -6,8 +6,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HashMapJoin implements InnerJoin <HashMap<Long, List<String>>>{
+
+    @Override
+    public HashMap<Long, List<String>> convert(List<Row> table1) {
+        return new HashMap<>(table1.stream().collect(Collectors.groupingBy(Row::getId, Collectors.mapping(Row::getValue, Collectors.toList()))));
+    }
 
     @Override
     public void innerJoin(HashMap<Long, List<String>> table1, HashMap<Long, List<String>> table2, String path) {
@@ -22,25 +28,6 @@ public class HashMapJoin implements InnerJoin <HashMap<Long, List<String>>>{
                         }
                     }
                 }
-            }
-        }catch (IOException e){
-            System.out.println("Something went wrong! Cannot write to file ");
-        }
-    }
-
-    @Override
-    public void innerJoin(HashMap<Long, List<String>> table1, HashMap<Long, List<String>> table2, String directoryName, String fileName) {
-        try {
-            String path = directoryName.substring(0, directoryName.lastIndexOf("\\") + 1) + fileName;
-            File file = new File(path);
-            if (!file.createNewFile()){
-                if(file.exists()){
-                    innerJoin(table1, table2, file.getAbsolutePath());
-                }else{
-                    System.out.println("Cannot create the file for writing");
-                }
-            }else {
-                innerJoin(table1, table2, file.getAbsolutePath());
             }
         }catch (IOException e){
             System.out.println("Something went wrong! Cannot write to file ");
